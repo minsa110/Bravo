@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import App from './authorization/App';
 import './index.css';
 
 import AddPage from './Add.js'
