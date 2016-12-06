@@ -7,7 +7,7 @@ var Router = React.createClass({
         let text = this.props.authOption === 'sign-up' ? 'Already signed up?' : 'Lack an account?'
         let buttonText = this.props.authOption === 'sign-up' ? 'Sign In' : 'Sign Up'
         return(
-            <div className="container">
+            <div className="contain">
                 <p className="buttonLabel">
                     <em>{text}</em>
                     <br></br>

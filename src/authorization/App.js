@@ -9,6 +9,8 @@ import Router from './Router';
 import AuthenticatedPages from './AuthenticatedPages';
 import './App.css';
 
+import { Link } from 'react-router';
+
 // Create app
 var App = React.createClass({
     getInitialState(){
@@ -98,7 +100,7 @@ var App = React.createClass({
             <div className="App-header">
               {/* <button className="btn">Sign Up</button> */}
 
-              <h1>Here's to Bravo...</h1>
+              <h1>Heres to Bravo...</h1>
             </div>
 
             <p className="App-intro">
@@ -117,7 +119,15 @@ var App = React.createClass({
                 {this.state.user &&
                     <section>
                         <SignOut submit={this.signOut}/>
-                        <AuthenticatedPages user={this.state.user.displayName}/>
+                        <div className="App">
+                          <div className = "navbar">
+                            <Link className="link" activeClassName='active' to="/">Dashboard</Link>
+                            <Link className="link" activeClassName='active' to="/page-2">Search</Link>
+                          </div>
+                          <div className="children">
+                            {this.props.children}
+                          </div>
+                        </div>
                     </section>
                 }
             </div>
