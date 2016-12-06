@@ -100,7 +100,7 @@ var App = React.createClass({
             <div className="App-header">
               {/* <button className="btn">Sign Up</button> */}
 
-              <h1>Here's to Bravo...</h1>
+              <h1>Heres to Bravo...</h1>
             </div>
 
             <p className="App-intro">
@@ -121,8 +121,8 @@ var App = React.createClass({
                         <SignOut submit={this.signOut}/>
                         <div className="App">
                           <div className = "navbar">
-                            <Link className="link" activeClassName='active' to="/">Page 1</Link>
-                            <Link className="link" activeClassName='active' to="/page-2">Page 2</Link>
+                            <Link className="link" activeClassName='active' to="/">Dashboard</Link>
+                            <Link className="link" activeClassName='active' to="/page-2">Search</Link>
                           </div>
                           <div className="children">
                             {this.props.children}
