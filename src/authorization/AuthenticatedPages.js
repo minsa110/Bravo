@@ -1,6 +1,7 @@
 // Authenticated components
 import React from 'react';
 import { Link } from 'react-router';
+import PersonalHomePage from '../PersonalHomePage.js';
 //import firebase from 'firebase';
 
 
@@ -20,7 +21,7 @@ var AuthenticatedPages = React.createClass({
 
         <div className="App">
           <p>Welcome, authenticated . Enjoy your dashboard.</p>
-
+          <PersonalHomePage />
         </div>
       )
     }
