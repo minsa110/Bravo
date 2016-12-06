@@ -58,11 +58,14 @@ var AddPage = React.createClass({
                     var url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=' + theatre_name + '&key=AIzaSyB7r7-XK91ef8d5uahmjxLm0D45Owp18c4';
                     $.get(url).then(function(data) {
                         var loc = data.results[0].geometry.location;
-                        pins[loc] = theatre_name;
-                        var marker = this.L.marker([loc.lat, loc.lng]);
+                        var lat = loc.lat;
+                        var lng = loc.lng;
+                        var loc_str = lat + ' ' + lng;
+                        pins[loc_str] = theatre_name;
+                        var marker = this.L.marker([lat, lng]);
                         marker.on('click', this.pinClick);
                         marker.addTo(this.map);
-                        var latlng = this.L.latLng(loc.lat, loc.lng);
+                        var latlng = this.L.latLng(lat, lng);
                         this.map.setView(latlng, 10);
                     }.bind(this), function(error) {
                         alert('Error in grabbing location')
@@ -78,10 +81,7 @@ var AddPage = React.createClass({
         console.log(event.target._latlng);
         var lat = event.target._latlng.lat;
         var lng = event.target._latlng.lng;
-        var loc = {
-            lat: lat,
-            lng: lng
-        }
+        var loc = lat + ' ' + lng;
         console.log(this.state.pins);
         var key = this.state.pins[loc];
         console.log(key);
