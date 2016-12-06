@@ -22,6 +22,7 @@ ReactDOM.render(
         <Router history={hashHistory}>
             <Route path="/" component={App}>
                 <IndexRoute component={AuthenticatedPages}/>
+                <Route path="page-1" component={AuthenticatedPages}/>
                 <Route path="page-2" component={PageTwo}/>
             </Route>
         </Router>,

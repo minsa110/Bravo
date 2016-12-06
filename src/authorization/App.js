@@ -103,9 +103,7 @@ var App = React.createClass({
               <h1>Here's to Bravo...</h1>
             </div>
 
-            <p className="App-intro">
-              {/* <i>Landing/Login/Signup page. Anyone can see. Remember to remove this!</i> */}
-            </p>
+          
 
 
             <div>
@@ -121,7 +119,7 @@ var App = React.createClass({
                         <SignOut submit={this.signOut}/>
                         <div className="App">
                           <div className = "navbar">
-                            <Link className="link" activeClassName='active' to="/">Dashboard</Link>
+                            <Link className="link" activeClassName='active' to="/page-1">Dashboard</Link>
                             <Link className="link" activeClassName='active' to="/page-2">Search</Link>
                           </div>
                           <div className="children">

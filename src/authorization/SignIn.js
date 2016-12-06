@@ -16,6 +16,8 @@ var SignUp = React.createClass({
                             <input id="password" type="password" className="validate" />
                             <label htmlFor="password">Password</label>
                         </div>
+
+                      
                     </div>
                     <button className="btn btn-primary">Sign In</button>
                 </form>
