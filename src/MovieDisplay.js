@@ -1,12 +1,17 @@
 import React from 'react';
-
+import './MovieDisplay.css';
 var Movie = React.createClass({
+  test() {
+    this.props.trying(this.props.title);
+  },
 
   render() {
     return(
-      <div>
-        <h4 className='title'>{this.props.title}</h4>
-      <img onClick={this.props.chat} src={this.props.src} />
+      <div id="singleMovie" className="col s3">
+        <div class="title">
+          <h5 className='title'>{this.props.title}</h5>          
+        </div>
+        <img onClick={this.test} src={this.props.src} />
       </div>
     )
   }
