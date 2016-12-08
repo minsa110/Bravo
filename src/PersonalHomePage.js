@@ -1,6 +1,6 @@
 // Authenticated components
 import React from 'react';
-import '../node_modules/materialize-css/dist/css/materialize.css';
+//import '../node_modules/materialize-css/dist/css/materialize.css';
 import './PersonalHomePage.css';
 import PersonalMovieList from './PersonalMovieList.js';
 //import firebase from 'firebase';
