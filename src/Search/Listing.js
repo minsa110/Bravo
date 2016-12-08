@@ -12,10 +12,10 @@ var Listing = React.createClass({
     },
     render:function(){
       return(
-        <div>
-          <h2>{this.props.title}</h2>
+        <ul className='collection with-header'>
+          <li className="collection-header"><h4>{this.props.title}</h4></li>
           {this.props.showtimes.map((time,i)=><Showtime key={'showtime-' + i} timeClick={this.update} time={time}/>)}
-        </div>
+        </ul>
       )
     }
 })

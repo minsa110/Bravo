@@ -34,7 +34,6 @@ var App = React.createClass({
     // Sign up for an account
     signUp(event){
         event.preventDefault();
-
         // Get form values
         let email = event.target.elements['email'].value;
         let password = event.target.elements['password'].value;
@@ -123,7 +122,7 @@ var App = React.createClass({
                             <Link className="link" activeClassName='active' to="/page-1">Dashboard</Link>
                             <Link className="link" activeClassName='active' to="/page-2">Search</Link>
                           </div>
-                          <div className="children">
+                          <div className="container children">
                             {this.props.children}
                           </div>
                         </div>

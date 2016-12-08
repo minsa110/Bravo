@@ -13,24 +13,42 @@ var AddPage = React.createClass({
         this.L = window.L;
         this.map = this.L.map(this.root).setView([
             39.5, -98.4
-        ], 4);
+        ], 3);
         var tileLayer = this.L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png')
         tileLayer.addTo(this.map);
     },
     componentWillMount: function() {
         // Get Current StartDate
-        var d = new Date();
-        var day = d.getDate();
-        if (day < 10) {
-            day = '0' + day;
+        var date = new Date();
+        var startDay = date.getDate();
+        var endDay = startDay + 15;
+        if (startDay < 10) {
+            startDay = '0' + startDay;
         }
-        this.startDate = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + day;
+        if (endDay < 10) {
+            endDay = '0' + endDay;
+        }
+        this.startDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + startDay;
+        this.endDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + endDay;
+    },
+    toggleSpin:function(bool){
+      var searchButton = $('#searchButton');
+      if(bool){
+        searchButton.css('-webkit-animation-name', 'spin');
+        searchButton.css('-webkit-animation-duration', '4000ms');
+      }
     },
     getListings: function(event) {
+        //make searchButton spin
+        this.toggleSpin(true);
+
+        //Clear Previous Markers
+        $('.leaflet-marker-icon').remove();
+
         // url to get movie listings
         var showTimes = new Map(); // holds current search results
         var pins = {};
-        var url = 'http://data.tmsapi.com/v1.1/movies/showings?startDate=' + this.startDate + '&zip=' + $('#zipcode').val() + '&api_key=ywfnykbqh7mgmuuwt5rjxr56';
+        var url = 'http://data.tmsapi.com/v1.1/movies/showings?startDate=' + $('#startDate').val() + '&zip=' + $('#zipcode').val() + '&radius='+ $('#radius').val() + '&api_key=ywfnykbqh7mgmuuwt5rjxr56';
         $.get(url).then(function(data) {
             // Populates showTimes and Map
             data.forEach((d) => d.showtimes.forEach(function(s) {
@@ -55,7 +73,7 @@ var AddPage = React.createClass({
                     showTimes.set(theatre_name, listings);
 
                     // Google Places API
-                    var url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=' + theatre_name + '&key=AIzaSyB7r7-XK91ef8d5uahmjxLm0D45Owp18c4';
+                    var url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=' + theatre_name + '&key=AIzaSyCZ3JmDMig4YFp1wRNbgVWSLpJC5k5x8X8';
                     $.get(url).then(function(data) {
                         var loc = data.results[0].geometry.location;
                         var lat = loc.lat;
@@ -66,7 +84,7 @@ var AddPage = React.createClass({
                         marker.on('click', this.pinClick);
                         marker.addTo(this.map);
                         var latlng = this.L.latLng(lat, lng);
-                        this.map.setView(latlng, 10);
+                        this.map.setView(latlng, 9);
                     }.bind(this), function(error) {
                         alert('Error in grabbing location')
                     });
@@ -106,24 +124,43 @@ var AddPage = React.createClass({
         window.theatre = key;
     },
     render: function() {
-        console.log('re-render!')
         var data = this.state.searchResults;
         var pins = this.state.pins;
         var active = this.state.active;
-        console.log('active: ' + active);
+
+        var results = null;
+        if(active){
+          results =  <ResultsTable addEvent={this.addEvent} window={window} data={this.state.active}/>
+        }
+        else {
+          results =
+              <div className='col s6'>
+                <h3>[Placeholder]</h3>
+              </div>
+        }
+
+
         return (
-            <div>
-                <input id='zipcode' style={{
-                    'marginTop': '20px',
-                    'marginLeft': '400px'
-                }} type='text' name='zip' placeholder='enter your zip'></input>
-                <button onClick={this.getListings}>Get Listings</button>
-                <div ref={(node) => {
-                    this.root = node;
-                }}></div>
-                <div id='results'>
-                  {active && <ResultsTable addEvent={this.addEvent} window={window} data={this.state.active}/>}
-                </div>
+            <div className='row'>
+              <div className='input-field col s6'>
+                <input id='zipcode' type='text' name='zip'></input>
+                <label htmlFor='zipcode'>Enter a Zipcode (US and Canada)</label>
+              </div>
+              <div className='col s6'>
+                <label htmlFor='startDate'>StartDate</label>
+                <input placeholder='StartDate' id='startDate' type="date" className="datepicker" min={this.startDate} max={this.endDate}/>
+              </div>
+              <div className="range-field col s11">
+                <label htmlFor='radius'>Max Radius(Miles)</label>
+                <input id='radius' type="range" min="5" max="20" />
+              </div>
+              <div className='col s1'>
+                <button id='searchButton' onClick={this.getListings} className="btn-floating btn-large waves-effect waves-light green"><i className="material-icons">search</i></button>
+              </div>
+              <div className='col s6' ref={(node) => {this.root = node;}}>
+                {/* <div id="loader"></div> */}
+              </div>
+                {results}
             </div>
         )
 

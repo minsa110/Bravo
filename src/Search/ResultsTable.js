@@ -21,11 +21,11 @@ var ResultsTable = React.createClass({
       listings_array.push({title:title, showtimes:showtimes});
     }
     return(
-      <div>
-      <h1>{theatre_name}</h1>
-        {
-          listings_array.map((d,i)=><Listing key={'listing-' + i} addEvent={this.addEvent} title={d.title} window={window} showtimes={d.showtimes}/>)
-        }
+      <div className='col s6' id='results'>
+        <h3>{theatre_name}</h3>
+          {
+            listings_array.map((d,i)=><Listing key={'listing-' + i} addEvent={this.addEvent} title={d.title} window={window} showtimes={d.showtimes}/>)
+          }
       </div>
     )
   }
