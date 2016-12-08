@@ -100,7 +100,7 @@ var App = React.createClass({
             <div className="App-header">
               {/* <button className="btn">Sign Up</button> */}
 
-              <h1>Here's to Bravo...</h1>
+              <h1>Movie'd</h1>
             </div>
 
 
