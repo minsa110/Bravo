@@ -2,20 +2,27 @@ import React from 'react'
 import Listing from './Listing.js'
 
 var ResultsTable = React.createClass({
+  addEvent:function(){
+    console.log('in addEvent!');
+    var newEvent = {
+      'theatre':this.props.data[0],
+      'title':window.title,
+      'time':window.time
+    }
+    console.log(newEvent);
+  },
   render:function(){
-    console.log('in results table')
-    console.log(this.props.data);
     var theatre_name = this.props.data[0];
     var listings = this.props.data[1];
-    listings = [];
+    var listings_array = [];
     for(var [title, showtimes] of listings){
-      listings.push({title:title, showtimes:showtimes});
+      listings_array.push({title:title, showtimes:showtimes});
     }
     return(
       <div>
       <h1>{theatre_name}</h1>
         {
-          listings.map((d,i)=><Listing key={'listing-' + i} title={d.title} showtimes={d.showtimes}/>)
+          listings_array.map((d,i)=><Listing key={'listing-' + i} addEvent={this.addEvent} title={d.title} window={window} showtimes={d.showtimes}/>)
         }
       </div>
     )

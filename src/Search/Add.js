@@ -1,7 +1,6 @@
 import React from 'react';
 import $ from 'jquery'
 import ResultsTable from './ResultsTable.js'
-var _ = require('lodash')
 
 // Gets data from GraceNote and puts it into
 // a Map where the keys are Theatres, and the values are Maps of movie titles and showtimes.
@@ -87,6 +86,7 @@ var AddPage = React.createClass({
         console.log(key);
         var listings = this.state.searchResults.get(key);
         this.setState({active:[key,listings]});
+        window.theatre = key;
     },
     render: function() {
         console.log('re-render!')
@@ -107,7 +107,7 @@ var AddPage = React.createClass({
                 <div id='results'>
                   {active && <ResultsTable data={this.state.active}/>}
                 </div>
-              </div>
+            </div>
         )
 
     }

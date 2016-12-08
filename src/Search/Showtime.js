@@ -2,9 +2,9 @@ import React from 'react'
 
  var Showtime = React.createClass({
    render:function(){
-     console.log('it\'s showtime!');
+     console.log(this.props.timeClick);
      return(
-       <li>{this.props.time}</li>
+       <button id={this.props.time} onClick={this.props.timeClick}>{this.props.time}</button>
      )
    }
  })

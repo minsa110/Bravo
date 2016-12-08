@@ -7,12 +7,12 @@ var Chat = React.createClass({
     return(
       <div>
         <ChatDisplay test={this.props.title} />
-        <div class="textBox">
-          <div class="row">
-            <form class="col s6">
-              <div class="row">
-                <div class="input-field col s6">
-                  <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <div className="textBox">
+          <div className="row">
+            <form className="col s6">
+              <div className="row">
+                <div className="input-field col s6">
+                  <textarea id="textarea1" className="materialize-textarea"></textarea>
                   <button className="btn">Sent</button>
                 </div>
               </div>
