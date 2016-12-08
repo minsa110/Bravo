@@ -22,11 +22,10 @@ var App = React.createClass({
     componentDidMount() {
         window.firebase = firebase;
         firebase.initializeApp(FirebaseConfig);
-
-
         firebase.auth().onAuthStateChanged((user) => {
             if (this.state.checked !== true) {
                 if(user) {
+                    console.log(user);
                     this.setState({user:user})
                 }
             }
@@ -40,6 +39,8 @@ var App = React.createClass({
 
         let photo = firebase.database().ref('photo');
         const storage = firebase.storage();
+
+        let users = firebase.database().ref('users');
 
         // Get form values
         let email = event.target.elements['email'].value;
@@ -60,6 +61,11 @@ var App = React.createClass({
               							email: email,
               							url: url,
               						});
+                          users.push({
+                            email:email,
+                            profilePicURL:url,
+                            subscriptions:[0]
+                          })
 
                           this.setState({user:firebase.auth().currentUser});
                       });
