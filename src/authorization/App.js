@@ -1,6 +1,7 @@
 
 import React from 'react';
 import firebase from 'firebase';
+import $ from 'jquery';
 import FirebaseConfig from './Config';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
@@ -21,6 +22,8 @@ var App = React.createClass({
     componentDidMount() {
         window.firebase = firebase;
         firebase.initializeApp(FirebaseConfig);
+
+
         firebase.auth().onAuthStateChanged((user) => {
             if (this.state.checked !== true) {
                 if(user) {
@@ -34,17 +37,33 @@ var App = React.createClass({
     // Sign up for an account
     signUp(event){
         event.preventDefault();
+
+        let photo = firebase.database().ref('photo');
+        const storage = firebase.storage();
+
         // Get form values
         let email = event.target.elements['email'].value;
         let password = event.target.elements['password'].value;
         let displayName = event.target.elements['displayName'].value;
+
+        var file = $('#file-uploaded')[0].files[0];
+        var fileRef= storage.ref(file.name);
 
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((user) => {
                 user.updateProfile({
                     displayName: displayName
                 }).then(() => {
-                    this.setState({user:firebase.auth().currentUser});
+                    fileRef.put(file).then(function() {
+                      fileRef.getDownloadURL().then(function(url) {
+                          photo.push({
+              							email: email,
+              							url: url,
+              						});
+
+                          this.setState({user:firebase.auth().currentUser});
+                      });
+                    });
                 })
             }).catch(function(error) {
               alert(error.message);

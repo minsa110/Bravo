@@ -25,26 +25,29 @@ var SignUp = React.createClass({
                             <input type="text" id="displayName" className="validate" />
                             <label htmlFor="displayName">Username</label>
                         </div>
-
-                        {/* <div className="profilePic"></div> */}
-                        {/* <button className="linkButton">Profile Picture</button> */}
-                        <div className="file-field input-field">
-                            <div className="btn btn-primary">
-                                <span>Profile Picture</span>
-                                <input type="file" id="file-upload"/>
+                        <div className="row-pic">
+                            <div className="input-field col s12">
+                            	<h6>Profile Picture</h6>
+                                <input type="file" id="file-uploaded" name="profilePic" />
                             </div>
-
-
-                            <div className="file-path-wrapper">
-                                <input className="file-path validate" type="text"/>
-                            </div>
+                            <br></br>
                         </div>
 
 
+                        {/* <div className="row-pic">
+                            <div className="file-field input-field">
+                                <div className="btn">
+                                    <span>Profile Picture</span>
+                                    <input type="file" id="file-uploaded"/>
+                                </div>
 
 
+                                <div className="file-path-wrapper">
+                                    <input className="file-path validate" type="text"/>
+                                </div>
+                            </div>
+                        </div> */}
 
-                    {/* </div> */}
                     <button className="btn btn-primary">Sign Up</button>
                 </form>
             </section>
