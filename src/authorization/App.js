@@ -53,7 +53,8 @@ var App = React.createClass({
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((user) => {
                 user.updateProfile({
-                    displayName: displayName
+                    displayName: displayName,
+                    Listings:[0]
                 }).then(() => {
                     fileRef.put(file).then(function() {
                       fileRef.getDownloadURL().then(function(url) {

@@ -3,6 +3,12 @@ import $ from 'jquery'
 import ResultsTable from './ResultsTable.js'
 import firebase from 'firebase';
 
+// var movieDBURL = 'https://api.themoviedb.org/3/search/movie?api_key=aadd317edcf7fded06137442eb497be2&query=';
+// var movieDBImageURL = 'https://image.tmdb.org/t/p/w500/';
+
+//for Google Place search
+var googleMap;
+
 // Gets data from GraceNote and puts it into
 // a Map where the keys are Theatres, and the values are Maps of movie titles and showtimes.
 var AddPage = React.createClass({
@@ -31,24 +37,15 @@ var AddPage = React.createClass({
         this.startDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + startDay;
         this.endDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + endDay;
     },
-    toggleSpin:function(bool){
-      var searchButton = $('#searchButton');
-      if(bool){
-        searchButton.css('-webkit-animation-name', 'spin');
-        searchButton.css('-webkit-animation-duration', '4000ms');
-      }
-    },
     getListings: function(event) {
-        //make searchButton spin
-        this.toggleSpin(true);
-
         //Clear Previous Markers
         $('.leaflet-marker-icon').remove();
+
 
         // url to get movie listings
         var showTimes = new Map(); // holds current search results
         var pins = {};
-        var url = 'http://data.tmsapi.com/v1.1/movies/showings?startDate=' + $('#startDate').val() + '&zip=' + $('#zipcode').val() + '&radius='+ $('#radius').val() + '&api_key=ywfnykbqh7mgmuuwt5rjxr56';
+        var url = 'http://data.tmsapi.com/v1.1/movies/showings?startDate=' + $('#startDate').val() + '&zip=' + $('#zipcode').val() + '&radius='+ $('#radius').val() + '&api_key=razswfzzubnqy49ry2km9ce9';
         $.get(url).then(function(data) {
             // Populates showTimes and Map
             data.forEach((d) => d.showtimes.forEach(function(s) {
@@ -61,11 +58,16 @@ var AddPage = React.createClass({
                         var movie = listings.get(title);
                         movie.push(time);
                     } else {
+                        // var url = movieDBURL + title;
+                        // $.get(url).then(function(data){
+                        //
+                        // }.bind(this))
                         var showtimes = [];
                         showtimes.push(time);
                         listings.set(title, showtimes);
                     }
                 } else {
+                    console.log('in else')
                     var listings = new Map();
                     var showtimes = [];
                     showtimes.push(time);
@@ -73,21 +75,37 @@ var AddPage = React.createClass({
                     showTimes.set(theatre_name, listings);
 
                     // Google Places API
-                    var url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=' + theatre_name + '&key=AIzaSyCZ3JmDMig4YFp1wRNbgVWSLpJC5k5x8X8';
-                    $.get(url).then(function(data) {
-                        var loc = data.results[0].geometry.location;
-                        var lat = loc.lat;
-                        var lng = loc.lng;
-                        var loc_str = lat + ' ' + lng;
-                        pins[loc_str] = theatre_name;
-                        var marker = this.L.marker([lat, lng]);
-                        marker.on('click', this.pinClick);
-                        marker.addTo(this.map);
-                        var latlng = this.L.latLng(lat, lng);
-                        this.map.setView(latlng, 9);
-                    }.bind(this), function(error) {
-                        alert('Error in grabbing location')
+                    var seattle = new window.google.maps.LatLng(47.609895,-122.330259);
+                    googleMap = new window.google.maps.Map(document.getElementById('gmap'), {
+                     api_key: 'AIzaSyAiuF-jDh08voLNMBlWXDZUmv14EorSsoM',
+                     center: seattle,
+                     zoom: 15
                     });
+                    var request = {
+                     location: seattle,
+                     radius: '100000',
+                     query: theatre_name
+                    };
+                    console.log(seattle);
+                    console.log(googleMap);
+                    var callback = function (results, status) {
+                     if (status == window.google.maps.places.PlacesServiceStatus.OK) {
+                       for (var i = 0; i < results.length; i++) {
+                         var loc = results[i].geometry.location;
+                         var lat = loc.lat();
+                         var lng = loc.lng();
+                         var loc_str = lat + ' ' + lng;
+                         pins[loc_str] = theatre_name;
+                         var marker = this.L.marker([lat, lng]);
+                         marker.on('click', this.pinClick);
+                         marker.addTo(this.map);
+                         var latlng = this.L.latLng(lat, lng);
+                         this.map.setView(latlng, 10);
+                       }
+                     }
+                    }.bind(this)
+                    var service = new window.google.maps.places.PlacesService(googleMap);
+                    service.textSearch(request, callback);
                 }
             }.bind(this)))
         }.bind(this), function(error) {
@@ -103,7 +121,6 @@ var AddPage = React.createClass({
         var friends = [];
         var newListing = {
           'ListingInfo':newEvent,
-          'owner':user,
           'friends':[user]
         }
         console.log(newListing);
@@ -160,6 +177,7 @@ var AddPage = React.createClass({
               <div className='col s6' ref={(node) => {this.root = node;}}>
                 {/* <div id="loader"></div> */}
               </div>
+                <div id="gmap"></div>
                 {results}
             </div>
         )
