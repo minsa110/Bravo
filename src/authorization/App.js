@@ -19,6 +19,7 @@ var App = React.createClass({
 
     // When component mounts, check the user
     componentDidMount() {
+        window.firebase = firebase;
         firebase.initializeApp(FirebaseConfig);
         firebase.auth().onAuthStateChanged((user) => {
             if (this.state.checked !== true) {
@@ -103,7 +104,7 @@ var App = React.createClass({
               <h1>Here's to Bravo...</h1>
             </div>
 
-          
+
 
 
             <div>

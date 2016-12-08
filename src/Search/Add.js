@@ -1,6 +1,7 @@
 import React from 'react';
 import $ from 'jquery'
 import ResultsTable from './ResultsTable.js'
+import firebase from 'firebase';
 
 // Gets data from GraceNote and puts it into
 // a Map where the keys are Theatres, and the values are Maps of movie titles and showtimes.
@@ -76,6 +77,22 @@ var AddPage = React.createClass({
         });
         this.setState({searchResults: showTimes, pins: pins});
     },
+    addEvent:function(){
+        console.log('newEvent');
+        console.log(window.newEvent);
+        var newEvent = window.newEvent;
+        var user = firebase.auth().currentUser.email;
+        var friends = [];
+        var newListing = {
+          'ListingInfo':newEvent,
+          'owner':user,
+          'friends':[user]
+        }
+        console.log(newListing);
+        var database = firebase.database();
+        var listings = database.ref('Listings');
+        listings.push(newListing);
+    },
     pinClick: function(event) {
         console.log(event.target._latlng);
         var lat = event.target._latlng.lat;
@@ -105,7 +122,7 @@ var AddPage = React.createClass({
                     this.root = node;
                 }}></div>
                 <div id='results'>
-                  {active && <ResultsTable data={this.state.active}/>}
+                  {active && <ResultsTable addEvent={this.addEvent} window={window} data={this.state.active}/>}
                 </div>
             </div>
         )

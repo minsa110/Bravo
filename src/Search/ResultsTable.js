@@ -10,6 +10,8 @@ var ResultsTable = React.createClass({
       'time':window.time
     }
     console.log(newEvent);
+    this.props.window.newEvent = newEvent;
+    this.props.addEvent();
   },
   render:function(){
     var theatre_name = this.props.data[0];
