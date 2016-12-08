@@ -17,7 +17,7 @@ var SignUp = React.createClass({
                             <label htmlFor="password">Password</label>
                         </div>
 
-                      
+
                     </div>
                     <button className="btn btn-primary">Sign In</button>
                 </form>

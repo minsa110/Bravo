@@ -26,9 +26,11 @@ var App = React.createClass({
             if (this.state.checked !== true) {
                 if(user) {
                     console.log(user);
+
                     this.setState({user:user})
                 }
             }
+
             this.setState({checked:true})
         });
     },
@@ -50,6 +52,7 @@ var App = React.createClass({
         var file = $('#file-uploaded')[0].files[0];
         var fileRef= storage.ref(file.name);
 
+
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((user) => {
                 user.updateProfile({
@@ -68,7 +71,9 @@ var App = React.createClass({
                             subscriptions:[0]
                           })
 
+
                           this.setState({user:firebase.auth().currentUser});
+
                       });
                     });
                 })
@@ -89,7 +94,9 @@ var App = React.createClass({
 
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then((user) => {
+
                 this.setState({user:firebase.auth().currentUser});
+
             }).catch(function(error) {
               alert(error.message);
             });
@@ -101,14 +108,18 @@ var App = React.createClass({
     // Sign out of an account
     signOut() {
         firebase.auth().signOut().then(() => {
+
             this.setState({user:null});
+
         });
     },
 
     // Route between 'sign-up' and 'sign-in'
     routeLogin() {
         let option = this.state.authOption === 'sign-in' ? 'sign-up' : 'sign-in';
+
         this.setState({authOption:option});
+
     },
 
     render() {

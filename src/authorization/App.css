@@ -7,10 +7,12 @@
 
 .App-header {
   background-color: #222;
-  height: 170px;
+  height: 200px;
   padding: 20px;
   color: white;
 }
+
+
 
 /*.App-intro {
   font-size: large;
@@ -23,12 +25,13 @@
   margin-right: 20px
 }*/
 
+
 .buttonLabel {
   color: white;
   position: absolute;
-  top: 30px;
-  right: 100px;
-  text-align: right;
+  top: 100px;
+  left: 140px;
+
 }
 
 
@@ -74,4 +77,20 @@ a.link.active {
 
 a > i {
   opacity: 1;
+}
+
+
+@media only screen and (min-width: 768px) {
+    .buttonLabel {
+      position: absolute;
+      top: 30px;
+      right: 100px;
+      text-align: right;
+    }
+
+    .App-header {
+      height: 170px;
+    }
+
+
 }
