@@ -155,7 +155,7 @@ var AddPage = React.createClass({
         }
         else {
           results =
-              <div className='AddMovie col s12 m5 l6'>
+              <div className='col s12 m6 l6'>
                 <h4>To add movies</h4>
                 <p>
                 1.  Enter Zipcode<br/>
@@ -184,7 +184,7 @@ var AddPage = React.createClass({
               <div className='col s1 m1 l1'>
                 <button id='searchButton' onClick={this.getListings} className="btn-floating btn-large waves-effect waves-teal"><i className="material-icons">search</i></button>
               </div>
-              <div className='col s12 m5 l6' ref={(node) => {this.root = node;}}>
+              <div className='col s12 m6 l6' ref={(node) => {this.root = node;}}>
                 {/* <div id="loader"></div> */}
               </div>
                 <div id="gmap"></div>
