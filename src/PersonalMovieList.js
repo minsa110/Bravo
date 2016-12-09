@@ -5,15 +5,12 @@ import './PersonalMovieList.css'
 var PersonalMovieList = React.createClass({
   getInitialState() {
     return({data: this.props.data,
-            id: null
-          })
+            id: null})
   },
   callChat:function(listingId) {
     this.setState({
       id: listingId
     })
-  },
-  print:function(obj){
   },
   componentWillMount() {
     var listings = [];
@@ -24,8 +21,6 @@ var PersonalMovieList = React.createClass({
       }
       listings.push(obj);
     }
-    // this.setState({data: listings})
-    console.log('The listings array!!!', listings);
     this.setState({data: listings});
     console.log('hello', listings[0].val.ListingInfo.title);
   },

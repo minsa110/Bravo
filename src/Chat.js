@@ -6,34 +6,51 @@ import firebase from 'firebase';
 
 var Chat = React.createClass({
   getInitialState() {
-    return ({text: []});
+    return ({text: [], theatre:null});
   },
-  save() {
+  componentWillMount:function(){
+    // var user = firebase.auth().currentUser.displayName
+    // var val = this.refs.newText.value;
+    var listings = firebase.database().ref('Listings');
+    listings.orderByKey().equalTo(this.props.chatInfo).once('value').then(function(snapshot){
+      var value = snapshot.val();
+      var key = Object.keys(value);
+      var theatre = value[key].ListingInfo['title'];
+      this.setState({theatre: theatre})
+    }.bind(this))
+  },
+  save:function() {
     var user = firebase.auth().currentUser.displayName
     var val = this.refs.newText.value;
     var listings = firebase.database().ref('Listings');
     listings.orderByKey().equalTo(this.props.chatInfo).once('value').then(function(snapshot){
       var value = snapshot.val();
-      console.log('Value Before:', value);
       var key = Object.keys(value);
       var chat = value[key].chat;
 
+      var ListingInfo = value[key].ListingInfo;
+      var friends = value[key].friends;
 
-      console.log('Chat:', chat);
-      console.log('Value After:', value);
+      var newMessage = user + ': ' + val;
+      if(chat[0] == 0){
+        chat[0] = newMessage;
+      }
+      else {
+        chat.push(newMessage);
+      }
+      listings.child(this.props.chatInfo).set({
+        ListingInfo:ListingInfo,
+        chat:chat,
+        friends:friends
+      });
 
-      var newArray = this.state.text;
-      newArray.push(user + ': ' + val);
-      console.log(newArray);
-      value[key].chat = newArray;
-      console.log('MOLAALALALAL', listings)
       // var test = value[key];
       // test.set({
       //   'ListingInfo':value[key].ListingInfo,
       //   'chat':newArray,
       //   'friends':value[key].friends
       // })
-      this.setState({text: newArray})
+      this.setState({text: chat})
 
       // listings.child(this.props.chatInfo).set({
       //   'ListingInfo':listings[key].ListingInfo,
@@ -41,19 +58,15 @@ var Chat = React.createClass({
       //   'friends':listings[key].friends
       // })
     }.bind(this));
-    // firebase.database().ref('Listings').on('child_modified')
-
-
   },
-
   render() {
     return(
       <div id="chat">
         <div id="title">
-          <h4>{this.props.chatInfo}</h4>
+          <h4>{this.state.theatre}</h4>
         </div>
 
-        <ChatDisplay id={this.props.chatInfo} text={this.state.text} />
+        <ChatDisplay key={this.props.chatInfo} id={this.props.chatInfo} text={this.state.text} />
 
         <div id="chatMessage">
           <div className="input-field">

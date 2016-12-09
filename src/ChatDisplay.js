@@ -37,9 +37,9 @@ var ChatDisplay = React.createClass({
     var chats = this.props.text;
       return (
         <div id="chatBox" className="container">
-          {chats.map((d)=>{
+          {chats.map((d,i)=>{
             return(
-              <p>{d}</p>
+              <p key={i}>{d}</p>
             )
           })
 
