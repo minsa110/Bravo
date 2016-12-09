@@ -114,6 +114,14 @@ var AddPage = React.createClass({
         });
         this.setState({searchResults: showTimes, pins: pins});
     },
+    showModal:function(){
+      var modal = document.getElementById('myModal');
+      modal.style.display= "block";
+      var toClose = document.getElementById("modalClose");
+      toClose.onclick = function() {
+          modal.style.display = "none";
+      }
+    },
     addEvent:function(){
         console.log('newEvent');
         console.log(window.newEvent);
@@ -152,8 +160,14 @@ var AddPage = React.createClass({
         }
         else {
           results =
-              <div className='col s6'>
-                <h3>[Placeholder]</h3>
+              <div className='col s4 offset-s1'>
+                <h4>To add movies</h4>
+                <ol>
+                  <li>Enter Zipcode</li>
+                  <li>Select the Date</li>
+                  <li>Set Distance</li>
+                  <li>Search!</li>
+                </ol>
               </div>
         }
 
@@ -179,6 +193,20 @@ var AddPage = React.createClass({
                 {/* <div id="loader"></div> */}
               </div>
                 <div id="gmap"></div>
+                <div id="myModal" className="modal">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <span id="modalClose">&times;</span>
+                    <h5>Success!</h5>
+                  </div>
+                  <div className="modal-body">
+                    <p>Thank you.<br/>The movie has been successfully added to your page. Enjoy!</p>
+                  </div>
+                  {/* <div className="modal-footer">
+                    <p>Thank you</p>
+                  </div> */}
+                  </div>
+                </div>
                 {results}
             </div>
         )
