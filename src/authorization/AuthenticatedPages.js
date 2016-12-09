@@ -51,7 +51,7 @@ var AuthenticatedPages = React.createClass({
         <div className="App">
           <p>Welcome, authenticated . Enjoy your dashboard.</p>
           {this.state.notifications && this.state.notifications.map((d,i)=><Notification accept={this.accept} deny={this.deny} key={'notification-' + i} theKey={'notification-' + i}/>)}
-          {/* <PersonalHomePage /> */}
+          <PersonalHomePage />
         </div>
       )
     }

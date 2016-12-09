@@ -2,6 +2,7 @@ import React from 'react';
 import $ from 'jquery'
 import ResultsTable from './ResultsTable.js'
 import firebase from 'firebase';
+import './Add.css';
 
 // var movieDBURL = 'https://api.themoviedb.org/3/search/movie?api_key=aadd317edcf7fded06137442eb497be2&query=';
 // var movieDBImageURL = 'https://image.tmdb.org/t/p/w500/';
@@ -171,10 +172,10 @@ var AddPage = React.createClass({
                 <label htmlFor='radius'>Max Radius(Miles)</label>
                 <input id='radius' type="range" min="5" max="20" />
               </div>
-              <div className='col s1'>
+              <div className='col s2 m1 l1'>
                 <button id='searchButton' onClick={this.getListings} className="btn-floating btn-large waves-effect waves-light green"><i className="material-icons">search</i></button>
               </div>
-              <div className='col s6' ref={(node) => {this.root = node;}}>
+              <div className='col s12 m6 l6' ref={(node) => {this.root = node;}}>
                 {/* <div id="loader"></div> */}
               </div>
                 <div id="gmap"></div>

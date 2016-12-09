@@ -137,7 +137,14 @@ var App = React.createClass({
             <div className="App-header">
               {/* <button className="btn">Sign Up</button> */}
 
-              <h1>Movie'd</h1>
+              <h1 className= "header-title">Movie'd</h1>
+              {!this.state.user &&
+                  <Router handleClick={this.routeLogin} authOption={this.state.authOption} />
+              }
+
+              {this.state.user &&
+                <SignOut submit={this.signOut}/>
+              }
             </div>
 
 
@@ -146,14 +153,15 @@ var App = React.createClass({
             <div>
                 {!this.state.user &&
                     <div>
+
                         {authComponent}
-                        <Router handleClick={this.routeLogin} authOption={this.state.authOption} />
+
                     </div>
 
                 }
                 {this.state.user &&
                     <section>
-                        <SignOut submit={this.signOut}/>
+                        {/* <SignOut submit={this.signOut}/> */}
                         <div className="App">
                           <div className = "navbar">
                             <Link className="link" activeClassName='active' to="/page-1">Dashboard</Link>
