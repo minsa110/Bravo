@@ -152,41 +152,7 @@ var App = React.createClass({
             <div className="App-header">
               {/* <button className="btn">Sign Up</button> */}
 
-<<<<<<< HEAD
-              <h1>Movie'd</h1>
-           </div>
 
-
-
-
-           <div>
-               {!this.state.user &&
-                   <div>
-                       {authComponent}
-                       <Router handleClick={this.routeLogin} authOption={this.state.authOption} />
-                   </div>
-
-               }
-               {this.state.user &&
-                   <section>
-                       <SignOut submit={this.signOut}/>
-                       <div className="App">
-                         <div className = "navbar">
-                           <Link className="link" activeClassName='active' to="/page-1">Dashboard</Link>
-                           <Link className="link" activeClassName='active' to="/page-2">Search</Link>
-                         </div>
-                         <div className="container children">
-                           {this.props.children}
-                         </div>
-                       </div>
-                   </section>
-               }
-           </div>
-         </div>
-
-       )
-   }
-=======
               <h1 className= "header-title">Movie'd</h1>
               {!this.state.user &&
                   <Router handleClick={this.routeLogin} authOption={this.state.authOption} />
@@ -228,6 +194,6 @@ var App = React.createClass({
 
         )
     }
->>>>>>> 02685c0760715728ebebe9c5340771bee9e4af02
+
 });
 export default App;

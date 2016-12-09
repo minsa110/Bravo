@@ -1,33 +1,48 @@
 import React from 'react';
 import ChatDisplay from './ChatDisplay.js';
 import './Chat.css';
-import firebase from 'firebase'
+import firebase from 'firebase';
+// import $ from 'jquery';
 
 var Chat = React.createClass({
   getInitialState() {
     return ({text: []});
   },
   save() {
+    var user = firebase.auth().currentUser.displayName
     var val = this.refs.newText.value;
-    firebase.database().ref('Listings').orderByKey().equalTo(this.props.chatInfo).once('value').then(function(snapshot){
+    var listings = firebase.database().ref('Listings');
+    listings.orderByKey().equalTo(this.props.chatInfo).once('value').then(function(snapshot){
       var value = snapshot.val();
       console.log('Value Before:', value);
       var key = Object.keys(value);
       var chat = value[key].chat;
+
+
       console.log('Chat:', chat);
-      console.log(typeof chat);
       console.log('Value After:', value);
-      value.child(this.props.chatInfo).set({
-        'ListingInfo':value.ListingInfo,
-        'chat':chat,
-        'friends':value.friends
-      })
-    });
+
+      var newArray = this.state.text;
+      newArray.push(user + ': ' + val);
+      console.log(newArray);
+      value[key].chat = newArray;
+      console.log('MOLAALALALAL', listings)
+      // var test = value[key];
+      // test.set({
+      //   'ListingInfo':value[key].ListingInfo,
+      //   'chat':newArray,
+      //   'friends':value[key].friends
+      // })
+      this.setState({text: newArray})
+
+      // listings.child(this.props.chatInfo).set({
+      //   'ListingInfo':listings[key].ListingInfo,
+      //   'chat':chat,
+      //   'friends':listings[key].friends
+      // })
+    }.bind(this));
     // firebase.database().ref('Listings').on('child_modified')
-    var newArray = this.state.text;
-    newArray.push(val);
-    console.log(newArray);
-    this.setState({text: newArray})
+
 
   },
 
@@ -38,7 +53,7 @@ var Chat = React.createClass({
           <h4>{this.props.chatInfo}</h4>
         </div>
 
-        <ChatDisplay text={this.state.text} />
+        <ChatDisplay id={this.props.chatInfo} text={this.state.text} />
 
         <div id="chatMessage">
           <div className="input-field">

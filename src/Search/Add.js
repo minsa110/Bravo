@@ -45,7 +45,8 @@ var AddPage = React.createClass({
         // url to get movie listings
         var showTimes = new Map(); // holds current search results
         var pins = {};
-        var url = 'http://data.tmsapi.com/v1.1/movies/showings?startDate=' + $('#startDate').val() + '&zip=' + $('#zipcode').val() + '&radius='+ $('#radius').val() + '&api_key=razswfzzubnqy49ry2km9ce9';
+        var url = 'http://data.tmsapi.com/v1.1/movies/showings?startDate=' + $('#startDate').val() + '&zip=' + $('#zipcode').val() + '&radius='+ $('#radius').val() + '&api_key=ywfnykbqh7mgmuuwt5rjxr56';
+        // var url = 'http://data.tmsapi.com/v1.1/movies/showings?startDate=' + $('#startDate').val() + '&zip=' + $('#zipcode').val() + '&radius='+ $('#radius').val() + '&api_key=razswfzzubnqy49ry2km9ce9';
         $.get(url).then(function(data) {
             // Populates showTimes and Map
             data.forEach((d) => d.showtimes.forEach(function(s) {
@@ -76,7 +77,8 @@ var AddPage = React.createClass({
                     // Google Places API
                     var seattle = new window.google.maps.LatLng(47.609895,-122.330259);
                     googleMap = new window.google.maps.Map(document.getElementById('gmap'), {
-                     api_key: 'AIzaSyAiuF-jDh08voLNMBlWXDZUmv14EorSsoM',
+                      api_key: 'AIzaSyAiuF-jDh08voLNMBlWXDZUmv14EorSsoM',
+                      // api_key: 'AIzaSyAiuF-jDh08voLNMBlWXDZUmv14EorSsoM',
                      center: seattle,
                      zoom: 15
                     });
@@ -125,7 +127,8 @@ var AddPage = React.createClass({
         var friends = [];
         var newListing = {
           'ListingInfo':newEvent,
-          'friends':[user]
+          'friends':[user],
+          'chat':[0]
         }
         var database = firebase.database();
         var listings = database.ref('Listings');
