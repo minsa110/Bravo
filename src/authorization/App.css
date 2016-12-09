@@ -70,7 +70,8 @@ h3 {
 a.link {
   color:white;
   text-decoration: none;
-  margin-right: 80px;
+  margin-right: 60px;
+  margin-left: 40px;
   opacity: .4;
   text-align: center;
 }

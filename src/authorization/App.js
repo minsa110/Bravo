@@ -83,6 +83,22 @@ var App = React.createClass({
         event.target.reset();
     },
 
+    // // Remember to enable email/password authentication on Firebase!
+    // firebase.auth().createUserWithEmailAndPassword(email, password)
+    //         .then((user) => {
+    //             user.updateProfile({
+    //                 displayName: displayName
+    //             }).then(() => {
+    //                 this.setState({user:firebase.auth().currentUser});
+    //             })
+    //         }).catch(function(error) {
+    //           alert(error.message);
+    //         });
+    //
+    //     // Reset form
+    //     event.target.reset();
+    // },
+
     // Sign into an account
     signIn (event){
         event.preventDefault();
