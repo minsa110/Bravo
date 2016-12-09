@@ -2,7 +2,6 @@ import React from 'react'
 import Showtime from './Showtime.js'
 import $ from 'jquery'
 
-var imageURL;
 var Listing = React.createClass({
     getInitialState: function() {
         return ({imageURL: ''});
@@ -19,10 +18,12 @@ var Listing = React.createClass({
         var len = searchString.length - 3;
         searchString = searchString.substr(0, len);
       }
+      var imageURL,vote_average;
       var url = movieDBURL + searchString;
       $.get(url).then((data) => {
         imageURL = movieDBImageURL + data.results[0].poster_path;
-        this.setState({imageURL: imageURL})
+        vote_average = data.results[0].vote_average;
+        this.setState({imageURL: imageURL,vote_average:vote_average});
       })
     },
     update:function(event){
@@ -37,7 +38,8 @@ var Listing = React.createClass({
       return(
         <ul className='collection with-header'>
           <li className="collection-header"><h4>{this.props.title}</h4>
-            <img className="listingImg" src={imageURL} />
+            <img className="listingImg" src={this.state.imageURL} />
+            <p id='vote_average'>Vote Average: {this.state.vote_average}</p>
           </li>
           {this.props.showtimes.map((time,i)=><Showtime key={'showtime-' + i} timeClick={this.update} time={time}/>)}
         </ul>
