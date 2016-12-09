@@ -14,15 +14,26 @@ var PersonalHome = React.createClass({
         var listingVals = [];
         var val = snapshot.val();
         var keys = Object.keys(val);
-        keys.forEach((key)=>listingVals.push(val[key]));
+        keys.forEach((key)=>{
+          if(val[key].friends.includes(firebase.auth().currentUser.email)){
+            listingVals.push(val[key]);
+          }
+        })
+        keys.forEach((key)=>console.log('Here is val[key].friends, ', val[key].friends));
         this.setState({list: listingVals, keys:keys});
-        console.log(this.state.list);
       })
     },
     render() {
+      var home_screen = null;
+      if(this.state.list){
+        home_screen = <PersonalMovieList keys={this.state.keys} data={this.state.list} />
+      }
+      else {
+        home_screen = <h1>You should really go out to the movies more!</h1>
+      }
       return (
         <div className="App">
-          {this.state.list && <PersonalMovieList keys={this.state.keys} data={this.state.list} />}
+          {home_screen}
         </div>
       )
     }
