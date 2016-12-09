@@ -3,3 +3,8 @@ div {
   font-weight: 300;
   font-size: 18px;
 }
+
+.listingImg {
+  height: 40%;
+  width: 40%;
+}

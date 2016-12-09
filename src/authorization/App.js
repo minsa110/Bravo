@@ -70,12 +70,11 @@ var App = React.createClass({
                             profilePicURL:url,
                             subscriptions:[0]
                           })
-
-
                           this.setState({user:firebase.auth().currentUser});
-
                       });
                     });
+                }).then(function() {
+                  window.location = './index.html';
                 })
             }).catch(function(error) {
               alert(error.message);

@@ -10,8 +10,31 @@ body {
 }
 
 .leaflet-container {
-    height: 400px;
+    height: 460px;
     width: 100%;
+}
+
+.container {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
+  margin-bottom: 70px;
+}
+
+#theater_intro {
+  margin-top: 0px;
+  margin-bottom: 10px;
+  height: 50px;
+}
+
+#theater_intro > p, #theater_intro > h4 {
+  margin: 0px;
+}
+
+#theater_intro > p {
+  font-size: 14px;
+}
+
+#theater_intro > h4 {
+  font-size: 20px;
 }
 
 #zipcode {
