@@ -67,7 +67,6 @@ var AddPage = React.createClass({
                         listings.set(title, showtimes);
                     }
                 } else {
-                    console.log('in else')
                     var listings = new Map();
                     var showtimes = [];
                     showtimes.push(time);
@@ -86,8 +85,6 @@ var AddPage = React.createClass({
                      radius: '100000',
                      query: theatre_name
                     };
-                    console.log(seattle);
-                    console.log(googleMap);
                     var callback = function (results, status) {
                      if (status == window.google.maps.places.PlacesServiceStatus.OK) {
                        for (var i = 0; i < results.length; i++) {
@@ -122,8 +119,7 @@ var AddPage = React.createClass({
       }
     },
     addEvent:function(){
-        console.log('newEvent');
-        console.log(window.newEvent);
+        // console.log(window.newEvent);
         var newEvent = window.newEvent;
         var user = firebase.auth().currentUser.email;
         var friends = [];
@@ -131,20 +127,16 @@ var AddPage = React.createClass({
           'ListingInfo':newEvent,
           'friends':[user]
         }
-        console.log(newListing);
         var database = firebase.database();
         var listings = database.ref('Listings');
         listings.push(newListing);
         this.showModal();
     },
     pinClick: function(event) {
-        console.log(event.target._latlng);
         var lat = event.target._latlng.lat;
         var lng = event.target._latlng.lng;
         var loc = lat + ' ' + lng;
-        console.log(this.state.pins);
         var key = this.state.pins[loc];
-        console.log(key);
         var listings = this.state.searchResults.get(key);
         this.setState({active:[key,listings]});
         window.theatre = key;

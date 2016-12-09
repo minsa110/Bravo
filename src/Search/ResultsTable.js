@@ -3,13 +3,12 @@ import Listing from './Listing.js'
 
 var ResultsTable = React.createClass({
   addEvent:function(){
-    console.log('in addEvent!');
     var newEvent = {
       'theatre':this.props.data[0],
       'title':window.title,
-      'time':window.time
+      'time':window.time,
+      'imgURL':window.imgURL
     }
-    console.log(newEvent);
     this.props.window.newEvent = newEvent;
     this.props.addEvent();
   },
