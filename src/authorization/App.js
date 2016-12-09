@@ -138,37 +138,37 @@ var App = React.createClass({
               {/* <button className="btn">Sign Up</button> */}
 
               <h1>Movie'd</h1>
-            </div>
+           </div>
 
 
 
 
-            <div>
-                {!this.state.user &&
-                    <div>
-                        {authComponent}
-                        <Router handleClick={this.routeLogin} authOption={this.state.authOption} />
-                    </div>
+           <div>
+               {!this.state.user &&
+                   <div>
+                       {authComponent}
+                       <Router handleClick={this.routeLogin} authOption={this.state.authOption} />
+                   </div>
 
-                }
-                {this.state.user &&
-                    <section>
-                        <SignOut submit={this.signOut}/>
-                        <div className="App">
-                          <div className = "navbar">
-                            <Link className="link" activeClassName='active' to="/page-1">Dashboard</Link>
-                            <Link className="link" activeClassName='active' to="/page-2">Search</Link>
-                          </div>
-                          <div className="container children">
-                            {this.props.children}
-                          </div>
-                        </div>
-                    </section>
-                }
-            </div>
-          </div>
+               }
+               {this.state.user &&
+                   <section>
+                       <SignOut submit={this.signOut}/>
+                       <div className="App">
+                         <div className = "navbar">
+                           <Link className="link" activeClassName='active' to="/page-1">Dashboard</Link>
+                           <Link className="link" activeClassName='active' to="/page-2">Search</Link>
+                         </div>
+                         <div className="container children">
+                           {this.props.children}
+                         </div>
+                       </div>
+                   </section>
+               }
+           </div>
+         </div>
 
-        )
-    }
+       )
+   }
 });
 export default App;

@@ -1,18 +1,16 @@
-img {
-  width: 50%;
-}
-
 #singleMovie {
   padding: 1rem;
   background-color: rgba(51, 153, 225, 0.2);
   margin: 5px;
-  height: 250px;
-  width: 23%;
+  height: 300px;
+  width: 190px;
 }
 
 img {
   width: 75%;
-  height: 125px;
+  height: 60%;
+  padding-bottom: 1rem;
+  margin-top: 2rem;
 }
 
 .title {
@@ -21,4 +19,5 @@ img {
 
 h5 {
   font-size: 20px;
+  margin: 0;
 }
