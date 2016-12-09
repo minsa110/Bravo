@@ -42,7 +42,6 @@ var AddPage = React.createClass({
         //Clear Previous Markers
         $('.leaflet-marker-icon').remove();
 
-
         // url to get movie listings
         var showTimes = new Map(); // holds current search results
         var pins = {};
@@ -136,6 +135,7 @@ var AddPage = React.createClass({
         var database = firebase.database();
         var listings = database.ref('Listings');
         listings.push(newListing);
+        this.showModal();
     },
     pinClick: function(event) {
         console.log(event.target._latlng);
@@ -184,12 +184,12 @@ var AddPage = React.createClass({
               </div>
               <div className="range-field col s11">
                 <label htmlFor='radius'>Max Radius(Miles)</label>
-                <input id='radius' type="range" min="5" max="20" />
+                <input id='radius' type="range" min="5" max="15" />
               </div>
-              <div className='col s2 m1 l1'>
+              <div className='col s1'>
                 <button id='searchButton' onClick={this.getListings} className="btn-floating btn-large waves-effect waves-light green"><i className="material-icons">search</i></button>
               </div>
-              <div className='col s12 m6 l6' ref={(node) => {this.root = node;}}>
+              <div className='col s6' ref={(node) => {this.root = node;}}>
                 {/* <div id="loader"></div> */}
               </div>
                 <div id="gmap"></div>
