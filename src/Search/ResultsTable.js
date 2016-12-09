@@ -20,7 +20,7 @@ var ResultsTable = React.createClass({
       listings_array.push({title:title, showtimes:showtimes});
     }
     return(
-      <div className='col s6'>
+      <div className='col s12 m5 l6'>
         <div id='theater_intro'>
           <p>Showing movies for</p>
           <h4>{theatre_name}</h4>

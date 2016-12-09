@@ -152,7 +152,7 @@ var AddPage = React.createClass({
         }
         else {
           results =
-              <div className='col s4 offset-s1'>
+              <div className='AddMovie col s12 m5 l6'>
                 <h4>To add movies</h4>
                 <p>
                 1.  Enter Zipcode<br/>
@@ -174,14 +174,14 @@ var AddPage = React.createClass({
                 <label htmlFor='startDate'>Enter Movie Date</label>
                 <input placeholder='StartDate' id='startDate' type="date" className="datepicker" min={this.startDate} max={this.endDate}/>
               </div>
-              <div className="range-field col s11">
+              <div className="range-field col s9 m10 l11">
                 <label htmlFor='radius'>Max Radius (Miles)</label>
                 <input id='radius' type="range" min="5" max="15" />
               </div>
-              <div className='col s1'>
-                <button id='searchButton' onClick={this.getListings} className="btn-floating btn-large waves-effect waves-light green"><i className="material-icons">search</i></button>
+              <div className='col s1 m1 l1'>
+                <button id='searchButton' onClick={this.getListings} className="btn-floating btn-large waves-effect waves-teal"><i className="material-icons">search</i></button>
               </div>
-              <div className='col s6' ref={(node) => {this.root = node;}}>
+              <div className='col s12 m5 l6' ref={(node) => {this.root = node;}}>
                 {/* <div id="loader"></div> */}
               </div>
                 <div id="gmap"></div>

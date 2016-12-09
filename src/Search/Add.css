@@ -66,3 +66,19 @@
     background-color: #5cb85c;
     color: white;
 }
+
+.map-margin {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.AddMovie {
+  font-family: Lato;
+}
+
+@media only screen and (min-width: 768px) {
+  .map-margin {
+    margin-bottom: 0;
+  }
+
+}
