@@ -12,6 +12,9 @@
   color: white;
 }
 
+.header-title {
+  line-height: 2rem;
+}
 
 
 /*.App-intro {
@@ -28,9 +31,10 @@
 
 .buttonLabel {
   color: white;
-  position: absolute;
-  top: 100px;
-  left: 140px;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+
 
 }
 
@@ -66,7 +70,8 @@ h3 {
 a.link {
   color:white;
   text-decoration: none;
-  margin-right: 80px;
+  margin-right: 60px;
+  margin-left: 40px;
   opacity: .4;
   text-align: center;
 }
@@ -90,6 +95,10 @@ a > i {
 
     .App-header {
       height: 170px;
+    }
+
+    .header-title {
+      line-height: 4.62rem;
     }
 
 

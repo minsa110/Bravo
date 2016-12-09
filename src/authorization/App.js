@@ -70,12 +70,11 @@ var App = React.createClass({
                             profilePicURL:url,
                             subscriptions:[0]
                           })
-
-
                           this.setState({user:firebase.auth().currentUser});
-
                       });
                     });
+                }).then(function() {
+                  window.location = './index.html';
                 })
             }).catch(function(error) {
               alert(error.message);
@@ -83,6 +82,22 @@ var App = React.createClass({
 
         event.target.reset();
     },
+
+    // // Remember to enable email/password authentication on Firebase!
+    // firebase.auth().createUserWithEmailAndPassword(email, password)
+    //         .then((user) => {
+    //             user.updateProfile({
+    //                 displayName: displayName
+    //             }).then(() => {
+    //                 this.setState({user:firebase.auth().currentUser});
+    //             })
+    //         }).catch(function(error) {
+    //           alert(error.message);
+    //         });
+    //
+    //     // Reset form
+    //     event.target.reset();
+    // },
 
     // Sign into an account
     signIn (event){
@@ -137,6 +152,7 @@ var App = React.createClass({
             <div className="App-header">
               {/* <button className="btn">Sign Up</button> */}
 
+<<<<<<< HEAD
               <h1>Movie'd</h1>
            </div>
 
@@ -170,5 +186,48 @@ var App = React.createClass({
 
        )
    }
+=======
+              <h1 className= "header-title">Movie'd</h1>
+              {!this.state.user &&
+                  <Router handleClick={this.routeLogin} authOption={this.state.authOption} />
+              }
+
+              {this.state.user &&
+                <SignOut submit={this.signOut}/>
+              }
+            </div>
+
+
+
+
+            <div>
+                {!this.state.user &&
+                    <div>
+
+                        {authComponent}
+
+                    </div>
+
+                }
+                {this.state.user &&
+                    <section>
+                        {/* <SignOut submit={this.signOut}/> */}
+                        <div className="App">
+                          <div className = "navbar">
+                            <Link className="link" activeClassName='active' to="/page-1">Dashboard</Link>
+                            <Link className="link" activeClassName='active' to="/page-2">Search</Link>
+                          </div>
+                          <div className="container children">
+                            {this.props.children}
+                          </div>
+                        </div>
+                    </section>
+                }
+            </div>
+          </div>
+
+        )
+    }
+>>>>>>> 02685c0760715728ebebe9c5340771bee9e4af02
 });
 export default App;

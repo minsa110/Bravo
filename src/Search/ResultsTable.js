@@ -3,13 +3,12 @@ import Listing from './Listing.js'
 
 var ResultsTable = React.createClass({
   addEvent:function(){
-    console.log('in addEvent!');
     var newEvent = {
       'theatre':this.props.data[0],
       'title':window.title,
-      'time':window.time
+      'time':window.time,
+      'imgURL':window.imgURL
     }
-    console.log(newEvent);
     this.props.window.newEvent = newEvent;
     this.props.addEvent();
   },
@@ -21,11 +20,17 @@ var ResultsTable = React.createClass({
       listings_array.push({title:title, showtimes:showtimes});
     }
     return(
-      <div className='col s6' id='results'>
-        <h3>{theatre_name}</h3>
-          {
-            listings_array.map((d,i)=><Listing key={'listing-' + i} addEvent={this.addEvent} title={d.title} window={window} showtimes={d.showtimes}/>)
-          }
+      <div className='col s12 m5 l6'>
+        <div id='theater_intro'>
+          <p>Showing movies for</p>
+          <h4>{theatre_name}</h4>
+        </div>
+        <div id='results'>
+        {
+          listings_array.map((d,i)=><Listing key={'listing-' + i} addEvent={this.addEvent} title={d.title} window={window} showtimes={d.showtimes}/>)
+        }
+        </div>
+
       </div>
     )
   }
