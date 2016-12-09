@@ -168,14 +168,14 @@ var AddPage = React.createClass({
             <div className='row'>
               <div className='input-field col s6'>
                 <input id='zipcode' type='text' name='zip'></input>
-                <label htmlFor='zipcode'>Enter a Zipcode (US and Canada)</label>
+                <label htmlFor='zipcode'>Enter a ZIP Code</label>
               </div>
               <div className='col s6'>
-                <label htmlFor='startDate'>StartDate</label>
+                <label htmlFor='startDate'>Enter Movie Date</label>
                 <input placeholder='StartDate' id='startDate' type="date" className="datepicker" min={this.startDate} max={this.endDate}/>
               </div>
               <div className="range-field col s11">
-                <label htmlFor='radius'>Max Radius(Miles)</label>
+                <label htmlFor='radius'>Max Radius (Miles)</label>
                 <input id='radius' type="range" min="5" max="15" />
               </div>
               <div className='col s1'>
