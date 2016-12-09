@@ -128,7 +128,7 @@ var AddPage = React.createClass({
         var newListing = {
           'ListingInfo':newEvent,
           'friends':[user],
-          'chat':[0]
+          'chat':['Start a conversation!']
         }
         var database = firebase.database();
         var listings = database.ref('Listings');

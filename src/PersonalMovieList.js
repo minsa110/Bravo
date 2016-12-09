@@ -2,15 +2,24 @@ import React from 'react';
 import Chat from './Chat.js';
 import MovieDisplay from './MovieDisplay.js';
 import './PersonalMovieList.css'
+import firebase from 'firebase'
+
 var PersonalMovieList = React.createClass({
   getInitialState() {
     return({data: this.props.data,
-            id: null})
+            activeChat: null})
   },
-  callChat:function(listingId) {
-    this.setState({
-      id: listingId
-    })
+  setChat:function(event) {
+    // var val = this.refs.newText.value;
+    var listings = firebase.database().ref('Listings');
+    var id = event.target.id;
+    listings.orderByKey().equalTo(id).once('value').then(function(snapshot){
+      var value = snapshot.val();
+      var key = Object.keys(value);
+      var title = value[key].ListingInfo['title'];
+      var chat = value[key].chat;
+      this.setState({activeChat:{id:key[0],chat:chat}, activeTitle:title});
+    }.bind(this))
   },
   componentWillMount() {
     var listings = [];
@@ -22,34 +31,23 @@ var PersonalMovieList = React.createClass({
       listings.push(obj);
     }
     this.setState({data: listings});
-    console.log('hello', listings[0].val.ListingInfo.title);
   },
   render() {
+    var activeChat;
+    if(this.state.activeChat){
+      activeChat = <Chat title={this.state.activeTitle} chatInfo={this.state.activeChat}/>;
+    }
     return (
       <div>
-
           <div className="flexbox-container">
             <div id="movieBox" className="flex-column">
               <h4>Movie List</h4>
               <div id="movieList" className="row">
-                {this.state.data.map(function(d, i){
-
-                  return (
-                    <MovieDisplay key={'key' + i}
-                        title={d.val.ListingInfo.title}
-                        theater={d.val.ListingInfo.theatre}
-                        time={d.val.ListingInfo.time}
-                        src={d.val.ListingInfo.imgURL}
-                        id={d.key}
-                        callChat={this.callChat}
-
-                    />
-                  )
-                }.bind(this))}
+                  {this.state.data.map((d,i) => <MovieDisplay key={'key-' + i} id={d.key} data={d.val.ListingInfo} setChat={this.setChat}/>)}
               </div>
             </div>
             <div className="flex-column">
-              {this.state.id && <Chat chatInfo={this.state.id} />}
+              {activeChat}
             </div>
           </div>
 
