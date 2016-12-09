@@ -185,21 +185,16 @@ var AddPage = React.createClass({
                 <button id='searchButton' onClick={this.getListings} className="btn-floating btn-large waves-effect waves-teal"><i className="material-icons">search</i></button>
               </div>
               <div className='col s12 m6 l6' ref={(node) => {this.root = node;}}>
-                {/* <div id="loader"></div> */}
               </div>
-                <div id="gmap"></div>
                 <div id="myModal" className="modal">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <span id="modalClose">&times;</span>
                     <h5>Success!</h5>
+                    <span id="modalClose">&times;</span>
                   </div>
                   <div className="modal-body">
                     <p>Thank you.<br/>The movie has been successfully added to your page. Enjoy!</p>
                   </div>
-                  {/* <div className="modal-footer">
-                    <p>Thank you</p>
-                  </div> */}
                   </div>
                 </div>
                 {results}

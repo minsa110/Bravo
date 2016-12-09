@@ -2,6 +2,8 @@ import React from 'react'
 import Showtime from './Showtime.js'
 import $ from 'jquery'
 
+var imageURL, vote_average;
+
 var Listing = React.createClass({
     getInitialState: function() {
         return ({imageURL: ''});
@@ -18,7 +20,6 @@ var Listing = React.createClass({
         var len = searchString.length - 3;
         searchString = searchString.substr(0, len);
       }
-      var imageURL,vote_average;
       var url = movieDBURL + searchString;
       $.get(url).then((data) => {
         imageURL = movieDBImageURL + data.results[0].poster_path;

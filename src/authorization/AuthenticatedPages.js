@@ -49,7 +49,7 @@ var AuthenticatedPages = React.createClass({
     render() {
       return (
         <div className="App">
-          <p>Welcome, authenticated . Enjoy your dashboard.</p>
+          <p>Welcome, {firebase.auth().currentUser.displayName} . You've just been Movie'd!</p>
           {this.state.notifications && this.state.notifications.map((d,i)=><Notification accept={this.accept} deny={this.deny} key={'notification-' + i} theKey={'notification-' + i}/>)}
 
           <PersonalHomePage />
