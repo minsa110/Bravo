@@ -162,12 +162,12 @@ var AddPage = React.createClass({
           results =
               <div className='col s4 offset-s1'>
                 <h4>To add movies</h4>
-                <ol>
-                  <li>Enter Zipcode</li>
-                  <li>Select the Date</li>
-                  <li>Set Distance</li>
-                  <li>Search!</li>
-                </ol>
+                <p>
+                1.  Enter Zipcode<br/>
+                2.  Select the Date<br/>
+                3.  Set Distance<br/>
+                4.  Search!
+                </p>
               </div>
         }
 
